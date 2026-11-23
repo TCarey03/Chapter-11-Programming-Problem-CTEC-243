@@ -9,8 +9,8 @@ public class Main {
         System.out.println("Original Array:");
         Sorts.printValues(values);
 
-        // Sort the array using Selection Sort
-        Sorts.selectionSort(values);
+        // Sort the array using Merge Sort
+        Sorts.mergeSort(values);
 
         // Display the sorted array
         System.out.println("Sorted Array:");

@@ -71,4 +71,72 @@ public class Sorts {
             swap(values, i, min);
         }
     }
+
+
+    // Starts the Merge Sort process
+    public static void mergeSort(int[] values) {
+        int[] tempArray = new int[values.length];
+        mergeSort(values, tempArray, 0, values.length - 1);
+    }
+
+    // Recursively divides the array into smaller sections
+    private static void mergeSort(int[] values, int[] tempArray,
+                                  int first, int last) {
+
+        if (first < last) {
+
+            int middle = (first + last) / 2;
+
+            // Sort the left half
+            mergeSort(values, tempArray, first, middle);
+
+            // Sort the right half
+            mergeSort(values, tempArray, middle + 1, last);
+
+            // Merge the two sorted halves
+            merge(values, tempArray, first, middle, last);
+        }
+    }
+
+    // Combines two sorted sections into one sorted section
+    private static void merge(int[] values, int[] tempArray,
+                              int first, int middle, int last) {
+
+        int left = first;
+        int right = middle + 1;
+        int index = first;
+
+        // Compare values from both halves
+        while (left <= middle && right <= last) {
+
+            if (values[left] <= values[right]) {
+                tempArray[index] = values[left];
+                left++;
+            } else {
+                tempArray[index] = values[right];
+                right++;
+            }
+
+            index++;
+        }
+
+        // Copy remaining values from the left half
+        while (left <= middle) {
+            tempArray[index] = values[left];
+            left++;
+            index++;
+        }
+
+        // Copy remaining values from the right half
+        while (right <= last) {
+            tempArray[index] = values[right];
+            right++;
+            index++;
+        }
+
+        // Copy the merged values back into the original array
+        for (int i = first; i <= last; i++) {
+            values[i] = tempArray[i];
+        }
+    }
 }
